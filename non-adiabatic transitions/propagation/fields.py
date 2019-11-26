@@ -85,8 +85,9 @@ def fit_potential_xy(x, y, z, potential, r, zmask):
 
     return c
 
-def fit_potential_xyz(fname, rxy, rz, zmaskxy, zmaskz):
+def fit_potential_xyz(fname, rxy, rz, zmaskxy, zmaskz, scale = 1):
     x,y,z,potential = load_potential(fname)
+    potential *= scale
     (x_grid, y_grid, z_grid), pot_grid = create_grid_potential(x,y,z,potential)
     intfun = fit_potential_z(x_grid,y_grid,z_grid,pot_grid,rz,zmaskz)
     c = fit_potential_xy(x,y,z,potential, rxy, zmaskxy)
