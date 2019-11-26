@@ -126,3 +126,4 @@ dmypy.json
 *.h5
 *.hdf
 *.hdf5
+*.mat
