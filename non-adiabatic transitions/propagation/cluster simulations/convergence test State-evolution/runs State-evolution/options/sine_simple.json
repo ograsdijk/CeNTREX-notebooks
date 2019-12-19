@@ -1,0 +1,31 @@
+{
+  "H_fname"       : "matrices/H6.npy",
+  "field_str": [
+     "0*t",
+     "0*t",
+     "A*np.sin(2*np.pi*(1/0.0004)*t)+500",
+     "0*t",
+     "0*t",
+     "0*t + 0.5"
+  ],
+  "scan_param"    : "A",
+  "scan_range": {
+    "start"       : 500,
+    "stop"        : 1000,
+    "num"         : 5,
+    "dtype"       : "int"
+  },
+  "fixed_params": {
+  },
+  "units": {
+    "A"         : "V/cm"
+  },
+  "time_params": {
+    "num_segm"    : "1",
+    "t_final"     : "0.0004",
+    "segm_pts"    : "750",
+    "batch_size"  : 1
+  },
+  "state_idx"     : 35,
+  "s"             : 15
+}
