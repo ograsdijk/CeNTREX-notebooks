@@ -1,0 +1,17 @@
+Thorlabs Beam
+Version: 7.0.4131.325
+Date M/d/yyyy	2/24/2020
+Time h:mm:ss AP	4:43:18 PM
+
+Device: 	BC106N-UV
+S/N: 	M00456126
+
+Device	BC106N-UV
+Serial Number	M00456126
+
+Attenuation	[dB]	40
+
+Wavelength	[nm]	271.5
+
+Measurement	Time [hh:mm:ss:zzz]	Beam Width (4-Sigma) X[µm]	Beam Width (4-Sigma) Y[µm]	Beam Width (4-Sigma) X'[µm]	Beam Width (4-Sigma) Y'[µm]	Azimuth Angle (4-Sigma)[°]	Beam Diameter (4-Sigma)[µm]	Effective Beam Diameter[µm]	Peak Position X[µm]	Peak Position Y[µm]	Peak Position R[µm]	Centroid Position X[µm]	Centroid Position Y[µm]	Centroid Position R[µm]	AD Saturation[%]	Total Power[mW]	Effective Area[µm<sup>2</sup>]	Peak Density[mW/µm<sup>2</sup>]	Ellipticity[%]	Minor Ellipse Diameter[µm]	Major Ellipse Diameter[µm]	Mean Ellipse Diameter[µm]	Eccentricity[%]	Orientation[deg]	Beam Width Clip X[µm]	Beam Width Clip Y[µm]	Gaussian Intensity X[%]	Gaussian Intensity Y[%]	Gaussian Diameter X[µm]	Gaussian Diameter Y[µm]	Bessel Intensity X[%]	Bessel Intensity Y[%]	Camera Temperature[°C]	
+1	16:43:18.297	5264.99	2642.65	5291.98	2588.18	6.64	4165.47	2016.10	-661.12	196.72	689.77	-562.67	61.72	566.04	84.89	143.63	1491396.23	0.00	34.80	1106.67	3180.49	2143.58	93.75	--	2904.25	1176.28	90.09	94.12	3482.93	1107.08	79.88	91.26	28.00	
