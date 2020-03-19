@@ -1,0 +1,49 @@
+{
+  "H_fname"       : "/home/demille/jog9/project/State-evolution/matrices/H6.npy",
+  "field_str": [
+     "A*(potential_plate_z.derivative()(v*t-0.45)*np.polynomial.polynomial.polyval2d(y,z,potential_plate_xy[0]))/100 + potential_quadrupole_z.derivative()(-0.45+v*t)*np.polynomial.polynomial.polyval2d(y,z,potential_quadrupole_xy[0])/100",
+     "A*(potential_plate_z(v*t-0.45)*np.polynomial.polynomial.polyval2d(y,z,potential_plate_xy[1]))/100 + potential_quadrupole_z(-0.45+v*t)*np.polynomial.polynomial.polyval2d(y,z,potential_quadrupole_xy[1])/100",
+     "A*(potential_plate_z(v*t-0.45)*np.polynomial.polynomial.polyval2d(y,z,potential_plate_xy[2]))/100 + potential_quadrupole_z(-0.45+v*t)*np.polynomial.polynomial.polyval2d(y,z,potential_quadrupole_xy[2])/100",
+     "0*t",
+     "0*t",
+     "0*t + B"
+  ],
+  "scan_param"    : "B",
+  "scan_range": {
+    "start"       : 0,
+    "stop"        : 20,
+    "num"         : 100
+  },
+  "scan_param2"    : "A",
+    "scan_range2": {
+      "start"       : 1,
+      "stop"        : 10,
+      "num"         : 100
+    },
+  "fixed_params": {
+    "v"             : 200,
+    "y"             : -0.006,
+    "z"             : -0.006
+  },
+  "pickle_fnames": {
+     "potential_plate_xy"       : "/home/demille/jog9/project/runs/straight-trajectories-homogeneous-field/options/potential_plate_xy_run1.pkl",
+     "potential_plate_z"        : "/home/demille/jog9/project/runs/straight-trajectories-homogeneous-field/options/potential_plate_z_run1.pkl",
+     "potential_quadrupole_xy"  : "/home/demille/jog9/project/runs/straight-trajectories-homogeneous-field/options/potential_quadrupole_xy_run1.pkl",
+     "potential_quadrupole_z"   : "/home/demille/jog9/project/runs/straight-trajectories-homogeneous-field/options/potential_quadrupole_z_run1.pkl"
+  },
+  "units": {
+    "A"           : "V/cm",
+    "B"           : "G",
+    "v"           : "m/s",
+    "y"           : "m",
+    "z"           : "m"
+  },
+  "time_params": {
+    "num_segm"    : "25",
+    "t_final"     : "0.001",
+    "segm_pts"    : "100",
+    "batch_size"  : 1
+  },
+  "state_idx"     : 35,
+  "chunk_size"    : 1
+}

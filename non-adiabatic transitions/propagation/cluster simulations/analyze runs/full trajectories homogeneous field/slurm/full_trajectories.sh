@@ -1,9 +1,8 @@
 #!/bin/bash
 #SBATCH --partition       day
 #SBATCH --job-name        full_trajectories_homogeneous_scale
-#SBATCH --nodes           10
-#SBATCH --ntasks-per-node 2
-#SBATCH --cpus-per-task   10
+#SBATCH --ntasks          200
+#SBATCH --cpus-per-task   1
 #SBATCH --mem-per-cpu     1G
 #SBATCH --time            24:00:00
 #SBATCH --mail-type       ALL
@@ -29,4 +28,4 @@ mpi_params="--mca mpi_warn_on_fork 0"
 
 #mpirun -n 1 python3 -m cProfile -s tottime $prog $run_dir $options_file
 #python3 $prog $run_dir $options_file
-mpirun -n 5 $mpi_params python3 $prog $run_dir $options_file
+mpirun -n 200 $mpi_params python3 $prog $run_dir $options_file

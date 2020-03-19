@@ -43,7 +43,7 @@ def polyfit2d(x, y, f, deg):
     vander = polynomial.polyvander2d(x, y, deg)
     vander = vander.reshape((-1,vander.shape[-1]))
     f = f.reshape((vander.shape[0],))
-    c = np.linalg.lstsq(vander, f)[0]
+    c = np.linalg.lstsq(vander, f, rcond=None)[0]
     return c.reshape(deg+1)
 
 def find_nearest(array, value):
