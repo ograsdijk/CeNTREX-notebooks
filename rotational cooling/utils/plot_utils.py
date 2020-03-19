@@ -40,8 +40,12 @@ def plot_binned_datasets_laserscan(binned_data_dsets, descriptions):
     ax_bar.set_ylabel('integral [adc]')
     set_fontsize(ax_bar, 15)
 
+    return {'scan errorbar': (fig_dot, ax_dot), 'scan histogram': (fig_bar, ax_bar)}
+
 def plot_binned_dataset_switching(bin_state_data, ratio, title, switch_labels):
     t = np.arange(0,20,1/(1e2))
+
+    figures = {}
 
     fig, ax = plt.subplots(figsize = (8,6))
     ax.plot(t, np.mean(bin_state_data[1], axis = 0), label = f'{switch_labels[1]}')
@@ -53,6 +57,8 @@ def plot_binned_dataset_switching(bin_state_data, ratio, title, switch_labels):
     ax.legend(fontsize = 15)
     set_fontsize(ax, 15)
 
+    figures['trace mean'] = (fig, ax)
+
     fig, ax = plt.subplots(figsize = (8,6))
     ax.plot(t[500:1500], (np.mean(bin_state_data[1], axis = 0)/np.mean(bin_state_data[0], axis = 0))[500:1500])
 
@@ -60,6 +66,8 @@ def plot_binned_dataset_switching(bin_state_data, ratio, title, switch_labels):
     ax.set_xlabel('time [ms]')
     ax.set_ylabel('ratio')
     set_fontsize(ax, 15)
+
+    figures['trace ratio'] = (fig, ax)
 
     # excluding ratios larger than 10, clearly some noisy data there
     ratio = np.array(ratio)
@@ -80,6 +88,8 @@ def plot_binned_dataset_switching(bin_state_data, ratio, title, switch_labels):
     ax.set_ylabel('signal ratio')
     set_fontsize(ax, 15)
 
+    figures['ratios'] = (fig, ax)
+
     bins = np.arange(ratio.min(), ratio.max()+1/8, 1/8)
     fig, ax = plt.subplots(figsize = (8,6))
     n, bins, _ = ax.hist(ratio, bins = bins, density = True, histtype='bar')
@@ -92,3 +102,7 @@ def plot_binned_dataset_switching(bin_state_data, ratio, title, switch_labels):
     textstr = f"$\mu$ = {popt[0]:.2f},  $\sigma$ = {popt[1]:.2f}"
     ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=15,
             verticalalignment='top', bbox=props);
+
+    figures['histogram'] = (fig, ax)
+
+    return figures
