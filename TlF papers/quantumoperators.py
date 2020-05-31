@@ -39,7 +39,7 @@ class BasisState:
     # scalar product (a * psi)
     def __rmul__(self, a):
         return self * a
-    
+
     def print_quantum_numbers(self):
         print( self.J,"%+d"%self.mJ,"%+0.1f"%self.m1,"%+0.1f"%self.m2 )
 
@@ -86,7 +86,7 @@ class State:
                 if cpt2 == cpt1:
                     data.append((amp1+amp2,cpt1))
         return State(data)
-                
+
     # superposition: subtraction
     def __sub__(self, other):
         return self + -1*other
@@ -98,15 +98,15 @@ class State:
     # scalar product (a * psi)
     def __rmul__(self, a):
         return self * a
-    
+
     # scalar division (psi / a)
     def __truediv__(self, a):
         return self * (1/a)
-    
+
     # negation
     def __neg__(self):
         return -1.0 * self
-    
+
     # inner product
     def __matmul__(self, other):
         result = 0
@@ -118,17 +118,17 @@ class State:
     # iterator methods
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         if self.index == 0:
             raise StopIteration
         self.index -= 1
         return self.data[self.index]
-    
+
     # direct access to a component
     def __getitem__(self, i):
         return self.data[i]
-    
+
 def J2(psi):
     return State([(psi.J*(psi.J+1),psi)])
 

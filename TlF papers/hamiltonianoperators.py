@@ -1,6 +1,5 @@
 import numpy as np
 from numpy import sqrt
-
 from quantumoperators import *
 
 # Units and constants
@@ -66,40 +65,40 @@ def HZz(psi):
         return -mu_Tl/psi.I1*I1z(psi) - mu_F/psi.I2*I2z(psi)
 
 def R10(psi):
-    amp1 = sqrt((psi.J-psi.mJ)*(psi.J+psi.mJ)/(8*psi.J**2-2))
+    amp1 = np.sqrt(2)*sqrt((psi.J-psi.mJ)*(psi.J+psi.mJ)/(8*psi.J**2-2))
     ket1 = BasisState(psi.J-1, psi.mJ, psi.I1, psi.m1, psi.I2, psi.m2)
-    amp2 = sqrt((psi.J-psi.mJ+1)*(psi.J+psi.mJ+1)/(6+8*psi.J*(psi.J+2)))
+    amp2 = np.sqrt(2)*sqrt((psi.J-psi.mJ+1)*(psi.J+psi.mJ+1)/(6+8*psi.J*(psi.J+2)))
     ket2 = BasisState(psi.J+1, psi.mJ, psi.I1, psi.m1, psi.I2, psi.m2)
     return State([(amp1,ket1),(amp2,ket2)])
 
 def R1m(psi):
-    amp1 = -.5*sqrt((psi.J+psi.mJ)*(psi.J+psi.mJ-1)/(4*psi.J**2-1))
+    amp1 = -.5*np.sqrt(2)*sqrt((psi.J+psi.mJ)*(psi.J+psi.mJ-1)/(4*psi.J**2-1))
     ket1 = BasisState(psi.J-1, psi.mJ-1, psi.I1, psi.m1, psi.I2, psi.m2)
-    amp2 = .5*sqrt((psi.J-psi.mJ+1)*(psi.J-psi.mJ+2)/(3+4*psi.J*(psi.J+2)))
+    amp2 = .5*np.sqrt(2)*sqrt((psi.J-psi.mJ+1)*(psi.J-psi.mJ+2)/(3+4*psi.J*(psi.J+2)))
     ket2 = BasisState(psi.J+1, psi.mJ-1, psi.I1, psi.m1, psi.I2, psi.m2)
     return State([(amp1,ket1),(amp2,ket2)])
 
 def R1p(psi):
-    amp1 = -.5*sqrt((psi.J-psi.mJ)*(psi.J-psi.mJ-1)/(4*psi.J**2-1))
+    amp1 = -.5*np.sqrt(2)*sqrt((psi.J-psi.mJ)*(psi.J-psi.mJ-1)/(4*psi.J**2-1))
     ket1 = BasisState(psi.J-1, psi.mJ+1, psi.I1, psi.m1, psi.I2, psi.m2)
-    amp2 = .5*sqrt((psi.J+psi.mJ+1)*(psi.J+psi.mJ+2)/(3+4*psi.J*(psi.J+2)))
+    amp2 = .5*np.sqrt(2)*sqrt((psi.J+psi.mJ+1)*(psi.J+psi.mJ+2)/(3+4*psi.J*(psi.J+2)))
     ket2 = BasisState(psi.J+1, psi.mJ+1, psi.I1, psi.m1, psi.I2, psi.m2)
     return State([(amp1,ket1),(amp2,ket2)])
 
 def HSx(psi):
-    return -D_TlF * ( R1m(psi) - R1p(psi) )
+    return -D_TlF * ( R1m(psi) - R1p(psi) )/sqrt(2)
 
 def HSy(psi):
-    return -D_TlF * 1j * ( R1m(psi) + R1p(psi) )
+    return -D_TlF * 1j * ( R1m(psi) + R1p(psi) )/sqrt(2)
 
 def HSz(psi):
-    return -D_TlF * sqrt(2)*R10(psi)
+    return -D_TlF * R10(psi)
 
 def HI1R(psi):
-    return com(I1z,R10,psi) + .5*(com(I1p,R1m,psi)+com(I1m,R1p,psi))
+    return com(I1z,R10,psi) + (com(I1p,R1m,psi)-com(I1m,R1p,psi))/sqrt(2)
 
 def HI2R(psi):
-    return com(I2z,R10,psi) + .5*(com(I2p,R1m,psi)+com(I2m,R1p,psi))
+    return com(I2z,R10,psi) + (com(I2p,R1m,psi)-com(I2m,R1p,psi))/sqrt(2)
 
 def Hc3_alt(psi):
     return 5*c3/c4*Hc4(psi) - 15*c3/2*(com(HI1R,HI2R,psi)+com(HI2R,HI1R,psi))
@@ -114,36 +113,6 @@ def HMatElems(H, QN):
             result[i,j] = (1*a)@H(b)
     return result
 
-def eigenstates(Ex,Ey,Ez,Bx,By,Bz,epsilon=1e-6):
-    # diagonalize the Hamiltonian
-    H = Hff_m \
-        + Ex*HSx_m + Ey*HSy_m + Ez*HSz_m \
-        + Bx*HZx_m + By*HZy_m + Bz*HZz_m
-    eigvals,eigvecs = np.linalg.eigh(H)
-
-    # find the quantum numbers of the largest-|amplitude| components
-    states = []
-    for eigvec in eigvecs.T:
-        # normalize the largest |amplitude| to 1
-        eigvec = eigvec / np.max(np.abs(eigvec))
-        # find indices of the largest-|amplitude| components
-        major = np.abs(eigvec) > epsilon
-
-        # collect the major components into a State
-        eigenstate = State()
-        for amp,psi in zip(eigvec[major], QN[major]):
-            eigenstate += amp * psi
-
-        # sort the components by decreasing |amplitude|
-        amps = np.array(eigenstate.data).T[0]
-        cpts = np.array(eigenstate.data).T[1]
-        cpts = cpts[np.argsort(np.abs(amps))]
-        amps = amps[np.argsort(np.abs(amps))]
-        sorted_state = State( data=np.array((amps,cpts)).T )
-        states.append(sorted_state)
-
-    return eigvals, np.array(states)
-
 class Hamiltonian:
     def __init__(self, Jmax, I_Tl, I_F):
         self.Jmax = Jmax
@@ -157,7 +126,7 @@ class Hamiltonian:
                       for mJ in range(-J,J+1)
                       for m1 in np.arange(-self.I_Tl,self.I_Tl+1)
                       for m2 in np.arange(-self.I_F,self.I_F+1)])
-        self.Hff_m = HMatElems(Hff, self.QN)
+        self.Hff_m = HMatElems(Hff_alt, self.QN)
         self.HSx_m = HMatElems(HSx, self.QN)
         self.HSy_m = HMatElems(HSy, self.QN)
         self.HSz_m = HMatElems(HSz, self.QN)
