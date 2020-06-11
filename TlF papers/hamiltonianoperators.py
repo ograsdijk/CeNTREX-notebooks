@@ -157,9 +157,9 @@ class Hamiltonian:
         states = []
         for eigenvectors in eigenvectors.T:
             # normalize the largest |amplitude| to 1
-            eigenvectors = eigenvectors / np.max(np.abs(eigenvectors))
+            eigenvectors_tmp = eigenvectors / np.max(np.abs(eigenvectors))
             # find indices of the largest-|amplitude| components
-            major = np.abs(eigenvectors) > epsilon
+            major = np.abs(eigenvectors_tmp) > epsilon
 
             # collect the major components into a State
             eigenstate = State()
