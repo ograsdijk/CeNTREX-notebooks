@@ -16,7 +16,7 @@ def load_measurement_data(fname, dset_name):
     return pxie, pxie_time, laserlock, wavelength, mirror
 
 def load_measurement_data_devices(fname, dset_name, devices = ('Laser Lock',
-                          'Wavelength', 'ZaberTMM')):
+                          'Wavelength', 'ZaberTMM'), ts_ch = 'ch0'):
     # loading data from HDF file
     with h5py.File(fname, 'r') as f:
         data_devices = {}
@@ -27,6 +27,6 @@ def load_measurement_data_devices(fname, dset_name, devices = ('Laser Lock',
         for dset in f[dset_name]['readout']['PXIe-5171']:
             if 'events' not in dset:
                 pxie[int(dset.split('_')[-1])] = f[dset_name]['readout']['PXIe-5171'][dset][()]
-                pxie_time[int(dset.split('_')[-1])] = f[dset_name]['readout']['PXIe-5171'][dset].attrs['ch0 : timestamp']
+                pxie_time[int(dset.split('_')[-1])] = f[dset_name]['readout']['PXIe-5171'][dset].attrs[f'{ts_ch} : timestamp']
 
     return pxie, pxie_time, data_devices
