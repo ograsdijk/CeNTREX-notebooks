@@ -1,0 +1,40 @@
+{
+  "H_fname"       : "matrices/H6.npy",
+  "field_str": [
+     "A*(potential_plate_z.derivative()(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_plate_xy[0]))/100 + potential_quadrupole_z.derivative()(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_quadrupole_xy[0])/100",
+     "A*(potential_plate_z(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_plate_xy[1]))/100 + potential_quadrupole_z(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_quadrupole_xy[1])/100",
+     "A*(potential_plate_z(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_plate_xy[2]))/100 + potential_quadrupole_z(trajectories[idx][2](t))*np.polynomial.polynomial.polyval2d(trajectories[idx][0](t),trajectories[idx][1](t),potential_quadrupole_xy[2])/100",
+     "0*t",
+     "0*t",
+     "0*t + 0.5"
+  ],
+  "scan_param"    : "idx",
+  "scan_range": {
+    "start"       : 0,
+    "stop"        : 4,
+    "num"         : 5,
+    "dtype"       : "int"
+  },
+  "fixed_params": {
+    "A"           : 1
+  },
+  "pickle_fnames": {
+     "potential_plate_xy"       : "runs/testing/options/potential_plate_xy_run1.pkl",
+     "potential_plate_z"        : "runs/testing/options/potential_plate_z_run1.pkl",
+     "potential_quadrupole_xy"  : "runs/testing/options/potential_quadrupole_xy_run1.pkl",
+     "potential_quadrupole_z"   : "runs/testing/options/potential_quadrupole_z_run1.pkl",
+     "trajectories"             : "runs/testing/options/trajectories_run1.pkl"
+  },
+  "units": {
+    "A"         : "V/cm",
+    "idx"         : ""
+  },
+  "time_params": {
+    "num_segm"    : "100",
+    "t_final"     : "trajectories[idx][-1]",
+    "segm_pts"    : "100 if ((-0.36 < trajectories[idx][2](T0) < -0.25) or (0.25 < trajectories[idx][2](T0) < 0.36)) else 50",
+    "batch_size"  : 1
+  },
+  "state_idx"     : 35,
+  "s"             : 15
+}
