@@ -40,12 +40,11 @@ def propagate_multi(args):
         xi = traj[0](0)
         yi = traj[1](0)
         zi = traj[2](0)
-        xs, ys, zs = xi, yi, zi
         Exi = intEx(xi,yi,zi)
         Eyi = intEy(xi,yi,zi)
         Ezi = intEz(xi,yi,zi)
         H0 = create_hamiltonian(intEx(xi,yi,zi), intEy(xi,yi,zi), intEz(xi,yi,zi), *B, *Hterms)
-        phi0 = np.linalg.eigh(H0)[1][:,start_level]
+        phi0 = np.linalg.eigh(H0)[1][:,35]
 
         ti = 0
         H = 0

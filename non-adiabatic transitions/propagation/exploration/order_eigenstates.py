@@ -202,7 +202,6 @@ def eigenshuffle(Asequence, return_reorder = False):
         return Dseq.real, Vseq, reorderL
     else:
         return Dseq.real, Vseq
-    
 def distancematrix(vec1, vec2):
     """simple interpoint distance matrix"""
     v1, v2 = np.meshgrid(vec1, vec2)
