@@ -128,3 +128,5 @@ dmypy.json
 *.hdf5
 *.mat
 *.DS_Store
+non-adiabatic transitions/propagation/cluster simulations/field_quadrupole.dat
+non-adiabatic transitions/propagation/cluster simulations/fields_plate_run1.dat
