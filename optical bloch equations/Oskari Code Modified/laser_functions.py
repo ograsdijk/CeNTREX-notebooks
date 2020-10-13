@@ -39,7 +39,7 @@ def calculate_power_needed(Omega, ME, fwhm = 0.0254, D_TlF = 13373921.308037223)
     for a transition with given matrix element with a gaussian spatial profile
     """
 
-    #Calculate the microwave electric field required (in V/m)
+    #Calculate the electric field required (in V/m)
     E =  Omega/(ME*D_TlF) * 100
 
     #Convert E to peak intensity
